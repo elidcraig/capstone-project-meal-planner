@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useAtom } from "jotai";
+import currentUserAtom from "../state/currentUserAtom";
 
 const formDefault = {
   username: "",
@@ -6,6 +8,7 @@ const formDefault = {
 };
 
 function LoginForm() {
+  const [, setCurrentUser] = useAtom(currentUserAtom);
   const [formData, setFormData] = useState(formDefault);
 
   function handleFormChange(e) {
@@ -23,8 +26,8 @@ function LoginForm() {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data);
       setFormData(formDefault);
+      setCurrentUser(data);
     } else {
       console.log(data.errors);
     }
@@ -32,7 +35,7 @@ function LoginForm() {
 
   return (
     <form className="login-form" onSubmit={handleFormSubmit}>
-      <label for="username">Username</label>
+      <label htmlFor="username">Username</label>
       <br />
       <input
         type="text"
@@ -42,7 +45,7 @@ function LoginForm() {
         onChange={handleFormChange}
       />
       <br />
-      <label for="password">Password</label>
+      <label htmlFor="password">Password</label>
       <br />
       <input
         type="password"
