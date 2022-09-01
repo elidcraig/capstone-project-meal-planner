@@ -36,7 +36,7 @@ function SignupForm() {
 
     if (response.ok) {
       setFormData(formDefault);
-      setCurrentUser(data)
+      setCurrentUser(data);
     } else {
       console.log(data.errors);
     }

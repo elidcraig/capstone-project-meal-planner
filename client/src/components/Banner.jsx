@@ -23,7 +23,10 @@ function Banner() {
       </Link>
       <div className="banner-button-group">
         {currentUser.id ? (
-          <span onClick={handleLogout}>Log out</span>
+          <>
+            <Link to="/account">Account</Link>
+            <span onClick={handleLogout}>Log out</span>
+          </>
         ) : (
           <>
             <Link to="/login">Log in</Link>
