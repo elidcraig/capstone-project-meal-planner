@@ -35,7 +35,7 @@ function SignupForm() {
       console.log(data);
       setFormData(formDefault);
     } else {
-      console.log(data);
+      console.log(data.errors);
     }
   }
 
