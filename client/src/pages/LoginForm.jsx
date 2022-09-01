@@ -9,7 +9,7 @@ const formDefault = {
 };
 
 function LoginForm() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [, setCurrentUser] = useAtom(currentUserAtom);
   const [formData, setFormData] = useState(formDefault);
@@ -31,7 +31,7 @@ function LoginForm() {
     if (response.ok) {
       setFormData(formDefault);
       setCurrentUser(data);
-      navigate("/account")
+      navigate("/account");
     } else {
       console.log(data.errors);
     }

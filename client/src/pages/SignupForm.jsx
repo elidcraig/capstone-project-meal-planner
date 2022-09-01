@@ -11,7 +11,7 @@ const formDefault = {
 };
 
 function SignupForm() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [, setCurrentUser] = useAtom(currentUserAtom);
   const [formData, setFormData] = useState(formDefault);
@@ -40,7 +40,7 @@ function SignupForm() {
     if (response.ok) {
       setFormData(formDefault);
       setCurrentUser(data);
-      navigate("/account")
+      navigate("/account");
     } else {
       console.log(data.errors);
     }

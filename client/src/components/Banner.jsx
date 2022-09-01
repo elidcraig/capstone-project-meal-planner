@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
 
 function Banner() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
   console.log(currentUser);
@@ -15,7 +15,7 @@ function Banner() {
     });
     if (response.ok) {
       setCurrentUser({});
-      navigate("/")
+      navigate("/");
     }
   }
 

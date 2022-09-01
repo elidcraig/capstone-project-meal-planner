@@ -1,6 +1,6 @@
-import { atom } from 'jotai';
+import { atom } from "jotai";
 
-const currentUserAtom = atom({})
-currentUserAtom.debugLabel = 'currentUser'
+const currentUserAtom = atom({});
+currentUserAtom.debugLabel = "currentUser";
 
-export default currentUserAtom
+export default currentUserAtom;
