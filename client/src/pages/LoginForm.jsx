@@ -21,7 +21,13 @@ function LoginForm() {
       body: JSON.stringify(formData)
     })
     const data = await response.json()
-    console.log(data)
+
+    if(response.ok) {
+      console.log(data)
+      setFormData(formDefault)
+    } else {
+      console.log(data.errors)
+    }
   }
 
   return (
