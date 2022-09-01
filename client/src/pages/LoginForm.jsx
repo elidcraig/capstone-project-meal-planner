@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
+import { useNavigate } from "react-router-dom";
 
 const formDefault = {
   username: "",
@@ -8,6 +9,8 @@ const formDefault = {
 };
 
 function LoginForm() {
+  const navigate = useNavigate()
+
   const [, setCurrentUser] = useAtom(currentUserAtom);
   const [formData, setFormData] = useState(formDefault);
 
@@ -28,6 +31,7 @@ function LoginForm() {
     if (response.ok) {
       setFormData(formDefault);
       setCurrentUser(data);
+      navigate("/account")
     } else {
       console.log(data.errors);
     }
