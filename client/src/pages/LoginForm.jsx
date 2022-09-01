@@ -32,8 +32,10 @@ function LoginForm() {
 
   return (
   <form className='login-form' onSubmit={ handleFormSubmit }>
-    <input type='text' name='username' value={ formData.username } onChange={ handleFormChange }/><br/>
-    <input type='password' name='password' value={ formData.password } onChange={ handleFormChange }/><br/>
+    <label for='username'>Username</label><br/>
+    <input type='text' name='username' required value={ formData.username } onChange={ handleFormChange }/><br/>
+    <label for='password'>Password</label><br/>
+    <input type='password' name='password' required value={ formData.password } onChange={ handleFormChange }/><br/>
     <input type='submit'/>
   </form>
   );
