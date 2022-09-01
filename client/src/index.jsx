@@ -11,7 +11,7 @@ root.render(
   <JotaiProvider>
     <BrowserRouter>
       <App />
+      <JotaiDebugger />
     </BrowserRouter>
-    <JotaiDebugger />
   </JotaiProvider>
 );

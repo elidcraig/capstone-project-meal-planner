@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAtom } from "jotai";
+import currentUserAtom from "../state/currentUserAtom";
 
 function Banner() {
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom)
+  console.log(currentUser)
+  
   return (
     <div className="banner">
       <Link to="/">
