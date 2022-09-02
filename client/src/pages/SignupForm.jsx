@@ -40,7 +40,7 @@ function SignupForm() {
     if (response.ok) {
       setFormData(formDefault);
       setCurrentUser(data);
-      navigate("/account");
+      navigate("/");
     } else {
       console.log(data.errors);
     }

@@ -31,7 +31,7 @@ function LoginForm() {
     if (response.ok) {
       setFormData(formDefault);
       setCurrentUser(data);
-      navigate("/account");
+      navigate("/");
     } else {
       console.log(data.errors);
     }
