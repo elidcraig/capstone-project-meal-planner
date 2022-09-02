@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  before_action :current_user, only: :show
 
   def show
     if session[:user_id]
-      render json: User.find_by(id: session[:user_id])
+      render json: @current_user
     else
       render json: { errors: ['Problem finding logged in user'] }, status: 401
     end

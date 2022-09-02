@@ -1,6 +1,8 @@
 class ListsController < ApplicationController
+  before_action :current_user, only: :index
+
   def index
-    # set up to render all lists of current user
+    render json: current_user.lists
   end
 
   def show
