@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
 
@@ -29,7 +30,9 @@ function AccountPage() {
       <h4>Your Lists</h4>
       <ul>
         {userLists.map((list) => (
-          <li key={list.id}>{list.title}</li>
+          <li key={list.id}>
+            <Link to={`/lists/${list.id}`}>{list.title}</Link>
+          </li>
         ))}
       </ul>
     </div>
