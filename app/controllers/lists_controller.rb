@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :current_user, only: :index
+  before_action :current_user, only: [:index, :show]
 
   def index
     render json: current_user.lists
@@ -10,7 +10,7 @@ class ListsController < ApplicationController
       render json: List.find(params[:id])
     else
       # set up to render 'current' or 'latest' list
-      render json: {message: 'featured list route'}
+      render json: current_user.lists.last
     end
   end
 
