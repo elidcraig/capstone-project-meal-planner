@@ -3,4 +3,6 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :lists
+  has_many :meals
+  has_many :plans
 end

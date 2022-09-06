@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :plan_meals
+  resources :plans
+  resources :meals
+  
   resources :lists
   get '/featured-list', to: 'lists#show'
 

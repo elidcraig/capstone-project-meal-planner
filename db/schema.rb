@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_02_180349) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_182219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_180349) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "meals", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "prep_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_meals_on_user_id"
+  end
+
+  create_table "plan_meals", force: :cascade do |t|
+    t.bigint "meal_id", null: false
+    t.bigint "plan_id", null: false
+    t.string "day"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_plan_meals_on_meal_id"
+    t.index ["plan_id"], name: "index_plan_meals_on_plan_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -51,4 +80,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_180349) do
   add_foreign_key "list_items", "items"
   add_foreign_key "list_items", "lists"
   add_foreign_key "lists", "users"
+  add_foreign_key "meals", "users"
+  add_foreign_key "plan_meals", "meals"
+  add_foreign_key "plan_meals", "plans"
+  add_foreign_key "plans", "users"
 end
