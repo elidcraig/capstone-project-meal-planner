@@ -6,10 +6,11 @@ import Banner from "./components/Banner";
 import AuthLandingPage from "./pages/AuthLandingPage";
 import UnauthLandingPage from "./pages/UnauthLandingPage";
 import AccountPage from "./pages/AccountPage";
-import ShoppingListPage from "./pages/ShoppingListPage";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
+import ShoppingListPage from "./pages/ShoppingListPage";
 import NewShoppingListForm from "./pages/NewShoppingListForm";
+import MealPlanPage from "./pages/MealPlanPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
@@ -41,6 +42,7 @@ function App() {
         <Route path="/account" element={<AccountPage />} />
         <Route path="/lists/:listId" element={<ShoppingListPage />} />
         <Route path="/lists/new" element={<NewShoppingListForm />} />
+        <Route path="/plans/:planId" element={<MealPlanPage />} />
       </Routes>
     </div>
   );
