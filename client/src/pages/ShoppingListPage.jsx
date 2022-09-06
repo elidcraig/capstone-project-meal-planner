@@ -5,6 +5,10 @@ function ShoppingListPage() {
   let { listId } = useParams();
 
   const [shoppingList, setShoppingList] = useState({});
+  const { title, items } = shoppingList;
+
+  const [targetTextContent, setTargetTextContent] = useState();
+  const [targetId, setTargetId] = useState();
 
   useEffect(() => {
     getAndSetShoppingList();
@@ -22,14 +26,42 @@ function ShoppingListPage() {
     }
   }
 
+  async function updateItemOnBlur() {
+    const response = await fetch(`/items/${targetId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: targetTextContent }),
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+      let newItems = items.map((item) => {
+        if (item.id === data.id) return data;
+        else return item;
+      });
+      setShoppingList({ ...shoppingList, items: newItems });
+    } else {
+      console.log(data.errors);
+    }
+  }
+
   if (!shoppingList.id) return <h4>LOADING...</h4>;
 
   return (
     <div className="shopping-list-page">
-      <h2>{shoppingList.title}</h2>
+      <h2>{title}</h2>
       <ul>
-        {shoppingList.items.map((item) => (
-          <li key={item.id}>{item.name}</li>
+        {items.map((item) => (
+          <li
+            key={item.id}
+            id={item.id}
+            contentEditable="true"
+            onInput={(e) => setTargetTextContent(e.currentTarget.textContent)}
+            onClick={(e) => setTargetId(e.currentTarget.id)}
+            onBlur={updateItemOnBlur}
+          >
+            {item.name}
+          </li>
         ))}
       </ul>
     </div>
