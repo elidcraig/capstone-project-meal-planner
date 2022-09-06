@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import { useAtom } from 'jotai';
-// import currentUserAtom from '../state/currentUserAtom';
 
 function MiniList() {
-  // const [currentUser] = useAtom(currentUserAtom)
-
   const [featuredList, setFeaturedList] = useState({});
 
   useEffect(() => {
