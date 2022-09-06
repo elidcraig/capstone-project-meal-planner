@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # resources :plan_meals
+  resources :plan_meals, only: [:create, :update, :destroy]
   resources :meals, only: [:create, :update, :destroy]
 
   resources :plans

@@ -2,7 +2,7 @@ class MealsController < ApplicationController
 
   def create
     new_meal = Meal.create!(meal_params)
-    render json: new_item, status: 201
+    render json: new_meal, status: 201
   end
 
   def update
