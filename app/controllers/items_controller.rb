@@ -13,6 +13,11 @@ class ItemsController < ApplicationController
     render json: item, status: 200
   end
 
+  def destroy
+    Item.destroy(params[:id])
+    head :no_content
+  end
+
   private
 
   def item_params

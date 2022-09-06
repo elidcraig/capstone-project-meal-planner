@@ -46,10 +46,19 @@ function ShoppingListPage() {
     }
   }
 
-  // async function handleDeleteItem() {
-  //   const response = await fetch()
-  //   const data = await response.json()
-  // }
+  async function handleDeleteItem(e) {
+    const itemId = e.target.id;
+    const response = await fetch(`/items/${e.target.id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      const newItemsArray = items.filter((item) => item.id != itemId);
+      setShoppingList({ ...shoppingList, items: newItemsArray });
+    } else {
+      console.error("OOPS");
+    }
+  }
 
   function handleNewItem(newItem) {
     const newItemsArray = [...items, newItem];
@@ -63,16 +72,21 @@ function ShoppingListPage() {
       <h2>{title}</h2>
       <ul>
         {items.map((item) => (
-          <li
-            key={item.id}
-            id={item.id}
-            contentEditable="true"
-            onInput={(e) => setTargetTextContent(e.currentTarget.textContent)}
-            onClick={(e) => setTargetId(e.currentTarget.id)}
-            onBlur={updateItemOnBlur}
-          >
-            {item.name}
-          </li>
+          <>
+            <li
+              key={item.id}
+              id={item.id}
+              contentEditable="true"
+              onInput={(e) => setTargetTextContent(e.currentTarget.textContent)}
+              onClick={(e) => setTargetId(e.currentTarget.id)}
+              onBlur={updateItemOnBlur}
+            >
+              {item.name}
+            </li>
+            <button id={item.id} onClick={handleDeleteItem}>
+              X
+            </button>
+          </>
         ))}
       </ul>
       <NewItemInput setNewItemInState={handleNewItem} listId={listId} />

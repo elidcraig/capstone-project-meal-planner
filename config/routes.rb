@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :lists
   get '/featured-list', to: 'lists#show'
 
-  resources :items, only: [:create, :update]
-  resources :list_items, only: :destroy
+  resources :items, only: [:create, :update, :destroy]
+  # resources :list_items, only: :destroy
 
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
