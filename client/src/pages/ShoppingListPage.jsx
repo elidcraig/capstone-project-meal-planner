@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import NewItemInput from "../components/NewItemInput";
 
 function ShoppingListPage() {
   let { listId } = useParams();
@@ -45,6 +46,16 @@ function ShoppingListPage() {
     }
   }
 
+  // async function handleDeleteItem() {
+  //   const response = await fetch()
+  //   const data = await response.json()
+  // }
+
+  function handleNewItem(newItem) {
+    const newItemsArray = [...items, newItem];
+    setShoppingList({ ...shoppingList, items: newItemsArray });
+  }
+
   if (!shoppingList.id) return <h4>LOADING...</h4>;
 
   return (
@@ -64,6 +75,7 @@ function ShoppingListPage() {
           </li>
         ))}
       </ul>
+      <NewItemInput setNewItemInState={handleNewItem} listId={listId} />
     </div>
   );
 }
