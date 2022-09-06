@@ -7,7 +7,7 @@ class ListsController < ApplicationController
 
   def show
     if params[:id]
-      render json: List.find(params[:id])
+      render json: find_list
     else
       # set up to render 'current' or 'latest' list
       render json: current_user.lists.last
@@ -20,7 +20,9 @@ class ListsController < ApplicationController
   end
 
   def update
-    # set up to update title of list
+    list = find_list
+    list.update!(list_params)
+    render json: list, status: 200
   end
 
   def destroy
@@ -31,5 +33,9 @@ class ListsController < ApplicationController
 
   def list_params
     params.permit(:title, :user_id)
+  end
+
+  def find_list
+    List.find(params[:id])
   end
 end

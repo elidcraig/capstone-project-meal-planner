@@ -27,6 +27,21 @@ function ShoppingListPage() {
     }
   }
 
+  async function updateListTitleOnBlur() {
+    const response = await fetch(`/lists/${listId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: targetTextContent }),
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+      setShoppingList({ ...shoppingList, title: data.title });
+    } else {
+      console.log(data.errors);
+    }
+  }
+
   async function updateItemOnBlur() {
     const response = await fetch(`/items/${targetId}`, {
       method: "PATCH",
@@ -53,6 +68,7 @@ function ShoppingListPage() {
     });
 
     if (response.ok) {
+      // eslint-disable-next-line
       const newItemsArray = items.filter((item) => item.id != itemId);
       setShoppingList({ ...shoppingList, items: newItemsArray });
     } else {
@@ -69,12 +85,18 @@ function ShoppingListPage() {
 
   return (
     <div className="shopping-list-page">
-      <h2>{title}</h2>
+      <h2
+        id={listId}
+        contentEditable="true"
+        onInput={(e) => setTargetTextContent(e.currentTarget.textContent)}
+        onBlur={updateListTitleOnBlur}
+      >
+        {title}
+      </h2>
       <ul>
         {items.map((item) => (
-          <>
-            <li
-              key={item.id}
+          <li key={item.id}>
+            <span
               id={item.id}
               contentEditable="true"
               onInput={(e) => setTargetTextContent(e.currentTarget.textContent)}
@@ -82,11 +104,11 @@ function ShoppingListPage() {
               onBlur={updateItemOnBlur}
             >
               {item.name}
-            </li>
+            </span>
             <button id={item.id} onClick={handleDeleteItem}>
               X
             </button>
-          </>
+          </li>
         ))}
       </ul>
       <NewItemInput setNewItemInState={handleNewItem} listId={listId} />
