@@ -9,6 +9,7 @@ import AccountPage from "./pages/AccountPage";
 import ShoppingListPage from "./pages/ShoppingListPage";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
+import NewShoppingListForm from "./pages/NewShoppingListForm";
 
 function App() {
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
@@ -39,6 +40,7 @@ function App() {
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/lists/:listId" element={<ShoppingListPage />} />
+        <Route path="/lists/new" element={<NewShoppingListForm />} />
       </Routes>
     </div>
   );

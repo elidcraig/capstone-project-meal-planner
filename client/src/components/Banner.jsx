@@ -26,6 +26,7 @@ function Banner() {
       <div className="banner-button-group">
         {currentUser.id ? (
           <>
+            <Link to="/lists/new">New List</Link>
             <Link to="/account">Account</Link>
             <span onClick={handleLogout}>Log out</span>
           </>
