@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :plan_meals
+  # resources :plan_meals
+  resources :meals, only: [:create, :update, :destroy]
+
   resources :plans
-  resources :meals
+  get '/featured-plan', to: 'plans#show'
   
   resources :lists
   get '/featured-list', to: 'lists#show'
