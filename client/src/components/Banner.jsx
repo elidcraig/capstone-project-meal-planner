@@ -7,7 +7,6 @@ function Banner() {
   const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
-  console.log(currentUser);
 
   async function handleLogout() {
     const response = await fetch("/logout", {
