@@ -6,6 +6,7 @@ import Banner from "./components/Banner";
 import AuthLandingPage from "./pages/AuthLandingPage";
 import UnauthLandingPage from "./pages/UnauthLandingPage";
 import AccountPage from "./pages/AccountPage";
+import ShoppingListPage from "./pages/ShoppingListPage";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/account" element={<AccountPage />} />
+        <Route path="/lists/:listId" element={<ShoppingListPage />} />
       </Routes>
     </div>
   );
