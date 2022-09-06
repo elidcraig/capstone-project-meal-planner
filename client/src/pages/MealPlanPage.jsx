@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import FullMealPlan from "../components/FullMealPlan";
 
 function MealPlanPage() {
   let { planId } = useParams();
 
   const [mealPlan, setMealPlan] = useState({});
-  const { name } = mealPlan;
+  const { name, plan_meals: planMeals } = mealPlan;
 
   const [targetTextContent, setTargetTextContent] = useState();
 
@@ -18,7 +19,7 @@ function MealPlanPage() {
     const response = await fetch(`/plans/${planId}`);
     const data = await response.json();
 
-    if(response.ok) {
+    if (response.ok) {
       setMealPlan(data);
     } else {
       console.log(data.errors);
@@ -50,6 +51,7 @@ function MealPlanPage() {
       >
         {name}
       </h2>
+      <FullMealPlan meals={planMeals} />
     </div>
   );
 }
