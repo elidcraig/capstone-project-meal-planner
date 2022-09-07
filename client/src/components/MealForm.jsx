@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
@@ -10,12 +10,37 @@ function MealForm({ day }) {
   const [currentUser] = useAtom(currentUserAtom);
   const [activePlan, setActivePlan] = useAtom(activePlanAtom);
 
+  const [pastMeals, setPastMeals] = useState([]);
+  // const [selectedMeal, setSelectedMeal] = useState({});
+
   const [isOpen, setIsOpen] = useState(false);
   const [formInput, setFormInput] = useState({});
+
+  useEffect(() => {
+    getAndSetPastMeals();
+  }, []);
+
+  async function getAndSetPastMeals() {
+    const response = await fetch("/past_meals");
+    const data = await response.json();
+    if (response.ok) {
+      setPastMeals([{ name: "New Meal" }, ...data]);
+    } else {
+      console.log(data.errors);
+    }
+  }
 
   function handleFormChange(e) {
     let newInputState = { ...formInput, [e.target.name]: e.target.value };
     setFormInput(newInputState);
+  }
+
+  function handleSelectChange(e) {
+    const activeMeal = pastMeals.find(
+      (meal) => meal.id === parseInt(e.target.value)
+    );
+    if (activeMeal) setFormInput(activeMeal);
+    else setFormInput({ name: "", description: "", prep_time: "" });
   }
 
   async function handleAddNewMeal(e) {
@@ -34,7 +59,7 @@ function MealForm({ day }) {
       body: JSON.stringify(config),
     });
     const data = await response.json();
-    console.log(data);
+
     if (response.ok) {
       const newPlanMeals = [...activePlan.plan_meals, data];
       const newPlanState = { ...activePlan, plan_meals: newPlanMeals };
@@ -44,18 +69,43 @@ function MealForm({ day }) {
     }
   }
 
+  // console.log(pastMeals);
+
   return (
     <div>
       {isOpen ? (
-        <form onChange={handleFormChange} onSubmit={handleAddNewMeal}>
-          <input value={formInput.name} type="text" name="name" />
-          <input value={formInput.description} type="text" name="description" />
-          <input value={formInput.prep_time} type="number" name="prep_time" />
-          <input type="submit" value="Confirm" />
-          <button onClick={(e) => setIsOpen(false)}>Cancel</button>
-        </form>
+        <>
+          <select name="pastMeals" onChange={handleSelectChange}>
+            {pastMeals.map((meal) => (
+              <option value={meal.id}>{meal.name}</option>
+            ))}
+          </select>
+          <form onChange={handleFormChange} onSubmit={handleAddNewMeal}>
+            <label htmlFor="name">Meal Name</label>
+            <br />
+            <input value={formInput.name} type="text" name="name" required />
+            <br />
+            <label htmlFor="description">Description</label>
+            <br />
+            <textarea name="description">{formInput.description}</textarea>
+            <br />
+            <label htmlFor="prep_time">Prep Time (mins)</label>
+            <br />
+            <input value={formInput.prep_time} type="number" name="prep_time" />
+            <br />
+            <input type="submit" value="Confirm" />
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                setFormInput({});
+              }}
+            >
+              Cancel
+            </button>
+          </form>
+        </>
       ) : (
-        <button onClick={(e) => setIsOpen(true)}>Add Meal</button>
+        <button onClick={() => setIsOpen(true)}>Add Meal</button>
       )}
     </div>
   );

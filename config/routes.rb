@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :plan_meals, only: [:create, :update, :destroy]
   resources :meals, only: [:create, :update, :destroy]
+  get '/past_meals', to: 'meals#index'
 
   resources :plans
   get '/featured-plan', to: 'plans#show'

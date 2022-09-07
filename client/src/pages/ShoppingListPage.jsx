@@ -62,14 +62,14 @@ function ShoppingListPage() {
   }
 
   async function handleDeleteItem(e) {
-    const itemId = e.target.id;
+    const itemId = parseInt(e.target.id);
     const response = await fetch(`/items/${e.target.id}`, {
       method: "DELETE",
     });
 
     if (response.ok) {
       // eslint-disable-next-line
-      const newItemsArray = items.filter((item) => item.id != itemId);
+      const newItemsArray = items.filter((item) => item.id !== itemId);
       setShoppingList({ ...shoppingList, items: newItemsArray });
     } else {
       console.error("OOPS");

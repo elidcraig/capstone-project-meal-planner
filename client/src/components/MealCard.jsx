@@ -15,6 +15,9 @@ function MealCard({ planMeal }) {
       const newPlanMeals = planMeals.filter((planMeal) => planMeal.id !== id);
       const newPlanState = { ...activePlan, plan_meals: newPlanMeals };
       setActivePlan(newPlanState);
+    } else {
+      const data = await response.json()
+      console.log(data.errors)
     }
   }
   return (
