@@ -53,7 +53,7 @@ function MealPlanPage() {
       >
         {name}
       </h2>
-      <FullMealPlan meals={planMeals} />
+      <FullMealPlan planMeals={planMeals} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MealCard from "./MealCard";
 import MealForm from "./MealForm";
 
-function FullMealPlan({ meals }) {
+function FullMealPlan({ planMeals }) {
   const daysOfWeek = [
     "Monday",
     "Tuesday",
@@ -15,19 +15,19 @@ function FullMealPlan({ meals }) {
 
   let mealsReference = {};
 
-  if (meals) {
-    meals.forEach((mealObj) => {
-      mealsReference[mealObj.day] = mealObj;
+  if (planMeals) {
+    planMeals.forEach((planMealObj) => {
+      mealsReference[planMealObj.day] = planMealObj;
     });
   }
 
   return (
     <div className="full-meal-plan">
       {daysOfWeek.map((day) => (
-        <div key={day} name={day} className="meal-plan-card">
+        <div key={day} name={day} className="meal-plan-day">
           <h4>{day}</h4>
           {mealsReference[day] ? (
-            <MealCard meal={mealsReference[day].meal} />
+            <MealCard planMeal={mealsReference[day]} />
           ) : (
             <MealForm day={day} />
           )}
