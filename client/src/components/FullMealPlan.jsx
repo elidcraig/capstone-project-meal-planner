@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function FullMealPlan({ meals }) {
   const daysOfWeek = [
@@ -13,15 +13,7 @@ function FullMealPlan({ meals }) {
 
   console.log(meals);
 
-  let mealsReference = {
-    // Monday: {},
-    // Tuesday: {},
-    // Wednesday: {},
-    // Thursday: {},
-    // Friday: {},
-    // Saturday: {},
-    // Sunday: {},
-  };
+  let mealsReference = {};
 
   if (meals) {
     meals.forEach((mealObj) => {

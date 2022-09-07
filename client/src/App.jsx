@@ -11,6 +11,7 @@ import SignupForm from "./pages/SignupForm";
 import ShoppingListPage from "./pages/ShoppingListPage";
 import NewShoppingListForm from "./pages/NewShoppingListForm";
 import MealPlanPage from "./pages/MealPlanPage";
+import NewMealPlanForm from "./pages/NewMealPlanForm";
 
 function App() {
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
@@ -43,6 +44,7 @@ function App() {
         <Route path="/lists/:listId" element={<ShoppingListPage />} />
         <Route path="/lists/new" element={<NewShoppingListForm />} />
         <Route path="/plans/:planId" element={<MealPlanPage />} />
+        <Route path="/plans/new" element={<NewMealPlanForm />} />
       </Routes>
     </div>
   );
