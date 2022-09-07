@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import MealCard from "./MealCard";
+import MealForm from "./MealForm";
 
 function FullMealPlan({ meals }) {
   const daysOfWeek = [
@@ -11,8 +13,6 @@ function FullMealPlan({ meals }) {
     "Sunday",
   ];
 
-  console.log(meals);
-
   let mealsReference = {};
 
   if (meals) {
@@ -21,16 +21,16 @@ function FullMealPlan({ meals }) {
     });
   }
 
-  console.log(mealsReference);
-
   return (
     <div className="full-meal-plan">
       {daysOfWeek.map((day) => (
         <div key={day} name={day} className="meal-plan-card">
           <h4>{day}</h4>
-          <div>
-            {mealsReference[day] ? mealsReference[day].meal.name : null}
-          </div>
+          {mealsReference[day] ? (
+            <MealCard meal={mealsReference[day].meal} />
+          ) : (
+            <MealForm day={day} />
+          )}
         </div>
       ))}
     </div>

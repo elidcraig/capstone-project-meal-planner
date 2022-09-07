@@ -2,6 +2,15 @@ class MealsController < ApplicationController
 
   def create
     new_meal = Meal.create!(meal_params)
+    if params[:day]
+      new_item = PlanMeal.create!({
+        day: params[:day],
+        plan_id: params[:plan_id],
+        meal: new_meal,
+      })
+      render json: new_item, status: 201
+      return
+    end
     render json: new_meal, status: 201
   end
 

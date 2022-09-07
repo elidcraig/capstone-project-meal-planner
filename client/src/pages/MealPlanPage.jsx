@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useAtom } from "jotai";
+import activePlanAtom from "../state/activePlanAtom";
 import FullMealPlan from "../components/FullMealPlan";
 
 function MealPlanPage() {
   let { planId } = useParams();
 
-  const [mealPlan, setMealPlan] = useState({});
+  const [mealPlan, setMealPlan] = useAtom(activePlanAtom);
   const { name, plan_meals: planMeals } = mealPlan;
 
   const [targetTextContent, setTargetTextContent] = useState();
