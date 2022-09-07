@@ -1,4 +1,9 @@
 class MealsController < ApplicationController
+  before_action :current_user, only: :index
+
+  def index
+    render json: current_user.meals, status: 200
+  end
 
   def create
     new_meal = Meal.create!(meal_params)
