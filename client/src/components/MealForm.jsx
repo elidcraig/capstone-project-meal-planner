@@ -11,6 +11,7 @@ function MealForm({ day, pastMeals = [] }) {
   const [activePlan, setActivePlan] = useAtom(activePlanAtom);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [selection, setSelection] = useState("New Meal");
   const [formInput, setFormInput] = useState({});
 
   function handleFormChange(e) {
@@ -22,13 +23,23 @@ function MealForm({ day, pastMeals = [] }) {
     const activeMeal = pastMeals.find(
       (meal) => meal.id === parseInt(e.target.value)
     );
-    if (activeMeal) setFormInput(activeMeal);
-    else setFormInput({ name: "", description: "", prep_time: "" });
+    if (activeMeal) {
+      setFormInput(activeMeal);
+      setSelection(activeMeal.name);
+    } else {
+      setFormInput({ name: "", description: "", prep_time: "" });
+      setSelection("New Meal");
+    }
   }
 
-  async function handleAddNewMeal(e) {
+  function handleAddMeal(e) {
     e.preventDefault();
 
+    if (selection === "New Meal") handleAddNewMeal();
+    else handleAddPastMeal();
+  }
+
+  async function handleAddNewMeal() {
     const config = {
       ...formInput,
       plan_id: planId,
@@ -52,7 +63,25 @@ function MealForm({ day, pastMeals = [] }) {
     }
   }
 
-  // console.log(pastMeals);
+  async function handleAddPastMeal() {
+    console.log(formInput);
+    const config = { meal_id: formInput.id, plan_id: planId, day: day };
+
+    const response = await fetch("/plan_meals", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(config),
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+      const newPlanMeals = [...activePlan.plan_meals, data];
+      const newPlanState = { ...activePlan, plan_meals: newPlanMeals };
+      setActivePlan(newPlanState);
+    } else {
+      console.log(data.errors);
+    }
+  }
 
   return (
     <div>
@@ -63,7 +92,7 @@ function MealForm({ day, pastMeals = [] }) {
               <option value={meal.id}>{meal.name}</option>
             ))}
           </select>
-          <form onChange={handleFormChange} onSubmit={handleAddNewMeal}>
+          <form onChange={handleFormChange} onSubmit={handleAddMeal}>
             <label htmlFor="name">Meal Name</label>
             <br />
             <input value={formInput.name} type="text" name="name" required />
