@@ -26,7 +26,8 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    # set up to remove list from database
+    find_list.destroy!
+    head :no_content
   end
 
   private

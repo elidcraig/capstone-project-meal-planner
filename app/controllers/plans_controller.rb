@@ -26,7 +26,8 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    # set up to remove plan from database
+    find_plan.destroy!
+    head :no_content
   end
 
   private

@@ -5,6 +5,7 @@ import currentUserAtom from "../state/currentUserAtom";
 
 function AccountPage() {
   const [currentUser] = useAtom(currentUserAtom);
+  const [editing, setEditing] = useState(false);
   const [userPlans, setUserPlans] = useState([]);
   const [userLists, setUserLists] = useState([]);
 
@@ -35,6 +36,28 @@ function AccountPage() {
     }
   }
 
+  async function handleDeletePlan(e) {
+    const planId = parseInt(e.target.id);
+    const response = await fetch(`/plans/${planId}`, { method: "DELETE" });
+    if (response.ok) {
+      const newPlanState = userPlans.filter((plan) => plan.id !== planId);
+      setUserPlans(newPlanState);
+    } else {
+      console.error("Error processing DELETE request");
+    }
+  }
+
+  async function handleDeleteList(e) {
+    const listId = parseInt(e.target.id);
+    const response = await fetch(`/lists/${listId}`, { method: "DELETE" });
+    if (response.ok) {
+      const newListState = userLists.filter((list) => list.id !== listId);
+      setUserLists(newListState);
+    } else {
+      console.error("Error processing DELETE request");
+    }
+  }
+
   return (
     <div className="account-page">
       <h2>{currentUser.username}</h2>
@@ -45,6 +68,11 @@ function AccountPage() {
         {userPlans.map((plan) => (
           <li key={plan.id}>
             <Link to={`/plans/${plan.id}`}>{plan.name}</Link>
+            {editing ? (
+              <button id={plan.id} onClick={handleDeletePlan}>
+                X
+              </button>
+            ) : null}
           </li>
         ))}
       </ul>
@@ -54,9 +82,17 @@ function AccountPage() {
         {userLists.map((list) => (
           <li key={list.id}>
             <Link to={`/lists/${list.id}`}>{list.title}</Link>
+            {editing ? (
+              <button id={list.id} onClick={handleDeleteList}>
+                X
+              </button>
+            ) : null}
           </li>
         ))}
       </ul>
+      <button onClick={() => setEditing(!editing)}>
+        {editing ? "Done" : "Edit"}
+      </button>
     </div>
   );
 }
