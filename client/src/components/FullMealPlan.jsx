@@ -1,8 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MealCard from "./MealCard";
 import MealForm from "./MealForm";
 
 function FullMealPlan({ planMeals }) {
+
+  const [pastMeals, setPastMeals] = useState([]);
+
+  useEffect(() => {
+    getAndSetPastMeals();
+  }, []);
+
+  async function getAndSetPastMeals() {
+    const response = await fetch("/past_meals");
+    const data = await response.json();
+    if (response.ok) {
+      setPastMeals([{ name: "New Meal" }, ...data]);
+    } else {
+      console.log(data.errors);
+    }
+  }
+
   const daysOfWeek = [
     "Monday",
     "Tuesday",
@@ -29,7 +46,7 @@ function FullMealPlan({ planMeals }) {
           {mealsReference[day] ? (
             <MealCard planMeal={mealsReference[day]} />
           ) : (
-            <MealForm day={day} />
+            <MealForm day={day} pastMeals={pastMeals} />
           )}
         </div>
       ))}

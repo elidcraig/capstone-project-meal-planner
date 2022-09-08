@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
 import activePlanAtom from "../state/activePlanAtom";
 
-function MealForm({ day }) {
+function MealForm({ day, pastMeals = [] }) {
   let { planId } = useParams();
 
   const [currentUser] = useAtom(currentUserAtom);
   const [activePlan, setActivePlan] = useAtom(activePlanAtom);
 
-  const [pastMeals, setPastMeals] = useState([]);
-  // const [selectedMeal, setSelectedMeal] = useState({});
-
   const [isOpen, setIsOpen] = useState(false);
   const [formInput, setFormInput] = useState({});
-
-  useEffect(() => {
-    getAndSetPastMeals();
-  }, []);
-
-  async function getAndSetPastMeals() {
-    const response = await fetch("/past_meals");
-    const data = await response.json();
-    if (response.ok) {
-      setPastMeals([{ name: "New Meal" }, ...data]);
-    } else {
-      console.log(data.errors);
-    }
-  }
 
   function handleFormChange(e) {
     let newInputState = { ...formInput, [e.target.name]: e.target.value };
