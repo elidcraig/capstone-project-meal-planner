@@ -39,7 +39,7 @@ function NewMealPlanForm() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <input type="submit" value="Create Meal Plan" />
+      <input type="submit" className="button" value="Create Meal Plan" />
     </form>
   );
 }

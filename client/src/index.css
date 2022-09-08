@@ -7,9 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+a, .logout {
+  text-decoration: none;
+  color: #1B998B;
+}
+
+button, .button {
+  cursor: pointer;
+  background-color: #1B998B;
+  color: white;
+  border-radius: 5px;
 }
 
 .banner {

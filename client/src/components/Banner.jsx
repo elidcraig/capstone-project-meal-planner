@@ -29,7 +29,9 @@ function Banner() {
             <Link to="/lists/new">New List</Link>
             <Link to="/plans/new">New Meal Plan</Link>
             <Link to="/account">Account</Link>
-            <span onClick={handleLogout}>Log out</span>
+            <span className="logout" onClick={handleLogout}>
+              Log out
+            </span>
           </>
         ) : (
           <>

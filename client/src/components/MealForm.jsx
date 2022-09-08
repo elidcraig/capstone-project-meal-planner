@@ -105,7 +105,7 @@ function MealForm({ day, pastMeals = [] }) {
             <br />
             <input value={formInput.prep_time} type="number" name="prep_time" />
             <br />
-            <input type="submit" value="Confirm" />
+            <input type="submit" className="button" value="Confirm" />
             <button
               onClick={() => {
                 setIsOpen(false);

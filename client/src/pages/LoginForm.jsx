@@ -59,7 +59,7 @@ function LoginForm() {
         onChange={handleFormChange}
       />
       <br />
-      <input type="submit" />
+      <input type="submit" className="button" />
     </form>
   );
 }

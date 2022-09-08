@@ -39,7 +39,7 @@ function NewShoppingListForm() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <input type="submit" value="Create List" />
+      <input type="submit" className="button" value="Create List" />
     </form>
   );
 }
