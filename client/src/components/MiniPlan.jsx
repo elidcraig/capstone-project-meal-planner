@@ -12,13 +12,13 @@ function MiniPlan() {
     const data = await response.json();
 
     if (response.ok) {
-      setFeaturedPlan(data);
+      if (data) setFeaturedPlan(data);
     } else {
       console.log(data.errors);
     }
   }
 
-  if (!featuredPlan.id) return <div>LOADING........</div>;
+  if (!featuredPlan.id) return <div>LOADING......</div>;
 
   return (
     <div className="mini-plan">

@@ -12,7 +12,7 @@ function MiniList() {
     const data = await response.json();
 
     if (response.ok) {
-      setFeaturedList(data);
+      if (data) setFeaturedList(data);
     } else {
       console.log(data.errors);
     }
