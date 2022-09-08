@@ -3,5 +3,5 @@ class Plan < ApplicationRecord
   has_many :plan_meals
   has_many :meals, through: :plan_meals
 
-  validates :name, presence: true, uniqueness: { scope: user }
+  validates :name, presence: true, uniqueness: { scope: :user }
 end

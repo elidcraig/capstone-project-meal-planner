@@ -4,7 +4,7 @@ class PlanMeal < ApplicationRecord
 
   validates :day, presence: true, 
     inclusion: { in: %w(Monday Tuesday Wednesday Thursday Friday Saturday Sunday)},
-    uniqueness: { scope: plan }
+    uniqueness: { scope: :plan }
   
 
 end
