@@ -6,7 +6,9 @@ function NewItemInput({ setNewItemInState, listId }) {
   const [currentUser] = useAtom(currentUserAtom);
   const [input, setInput] = useState("");
 
-  async function handleAddNewItem() {
+  async function handleAddNewItem(e) {
+    e.preventDefault();
+
     const config = {
       user_id: currentUser.id,
       list_id: listId,
@@ -29,14 +31,14 @@ function NewItemInput({ setNewItemInState, listId }) {
   }
 
   return (
-    <>
+    <form className="new-item-form" onSubmit={handleAddNewItem}>
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={handleAddNewItem}>Add</button>
-    </>
+      <input type="submit" className="button" />
+    </form>
   );
 }
 
