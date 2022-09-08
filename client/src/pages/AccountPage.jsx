@@ -40,7 +40,7 @@ function AccountPage() {
       <h2>{currentUser.username}</h2>
       <h4>{currentUser.email}</h4>
 
-      <h4>YourPlans</h4>
+      <h4>Your Plans</h4>
       <ul>
         {userPlans.map((plan) => (
           <li key={plan.id}>
