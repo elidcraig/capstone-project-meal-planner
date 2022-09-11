@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :plan_meals, only: [:create, :update, :destroy]
-  resources :meals, only: [:index, :create, :update, :destroy]
+  resources :meals
   get '/past_meals', to: 'meals#index'
 
   resources :plans

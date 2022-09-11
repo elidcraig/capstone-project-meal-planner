@@ -119,7 +119,7 @@ function AccountPage() {
       <ul>
         {userMeals.map((meal) => (
           <li key={meal.id}>
-            {meal.name}
+            <Link to={`/meals/${meal.id}/edit`}>{meal.name}</Link>
             {editing ? (
               <button id={meal.id} onClick={handleDeleteMeal}>
                 X

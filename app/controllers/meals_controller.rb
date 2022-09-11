@@ -5,6 +5,10 @@ class MealsController < ApplicationController
     render json: current_user.meals, status: 200
   end
 
+  def show
+    render json: Meal.find(params[:id]), status: 200
+  end
+
   def create
     new_meal = Meal.create!(meal_params)
     if params[:day]
