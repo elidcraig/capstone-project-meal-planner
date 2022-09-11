@@ -8,10 +8,12 @@ function AccountPage() {
   const [editing, setEditing] = useState(false);
   const [userPlans, setUserPlans] = useState([]);
   const [userLists, setUserLists] = useState([]);
+  const [userMeals, setUserMeals] = useState([]);
 
   useEffect(() => {
     getAndSetPlans();
     getAndSetLists();
+    getAndSetMeals();
   }, []);
 
   async function getAndSetPlans() {
@@ -36,6 +38,17 @@ function AccountPage() {
     }
   }
 
+  async function getAndSetMeals() {
+    const response = await fetch("/meals");
+    const data = await response.json();
+
+    if (response.ok) {
+      setUserMeals(data);
+    } else {
+      console.log(data.errors);
+    }
+  }
+
   async function handleDeletePlan(e) {
     const planId = parseInt(e.target.id);
     const response = await fetch(`/plans/${planId}`, { method: "DELETE" });
@@ -53,6 +66,17 @@ function AccountPage() {
     if (response.ok) {
       const newListState = userLists.filter((list) => list.id !== listId);
       setUserLists(newListState);
+    } else {
+      console.error("Error processing DELETE request");
+    }
+  }
+
+  async function handleDeleteMeal(e) {
+    const mealId = parseInt(e.target.id);
+    const response = await fetch(`/meals/${mealId}`, { method: "DELETE" });
+    if (response.ok) {
+      const newMealState = userMeals.filter((meal) => meal.id !== mealId);
+      setUserMeals(newMealState);
     } else {
       console.error("Error processing DELETE request");
     }
@@ -90,6 +114,21 @@ function AccountPage() {
           </li>
         ))}
       </ul>
+
+      <h4>Your Meals</h4>
+      <ul>
+        {userMeals.map((meal) => (
+          <li key={meal.id}>
+            {meal.name}
+            {editing ? (
+              <button id={meal.id} onClick={handleDeleteMeal}>
+                X
+              </button>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
       <button onClick={() => setEditing(!editing)}>
         {editing ? "Done" : "Edit"}
       </button>
