@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function MiniPlan() {
   const [featuredPlan, setFeaturedPlan] = useState({});
@@ -22,7 +23,15 @@ function MiniPlan() {
 
   return (
     <div className="mini-plan">
-      <h4>{featuredPlan.name}</h4>
+      <Link to={`/plans/${featuredPlan.id}`}>
+        <h4>{featuredPlan.name}</h4>
+      </Link>
+      {featuredPlan.plan_meals.map((item) => (
+        <p key={item.id}>
+          <b>{item.day}: </b>
+          {item.meal.name}
+        </p>
+      ))}
     </div>
   );
 }

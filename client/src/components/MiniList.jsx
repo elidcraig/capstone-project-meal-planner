@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function MiniList() {
   const [featuredList, setFeaturedList] = useState({});
@@ -22,7 +23,9 @@ function MiniList() {
 
   return (
     <div className="mini-list">
-      <h4>{featuredList.title}</h4>
+      <Link to={`/lists/${featuredList.id}`}>
+        <h4>{featuredList.title}</h4>
+      </Link>
       {featuredList.items.map((item) => (
         <p key={item.id}>{item.name}</p>
       ))}
