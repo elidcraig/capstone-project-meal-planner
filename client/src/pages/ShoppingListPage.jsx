@@ -5,6 +5,8 @@ import NewItemInput from "../components/NewItemInput";
 function ShoppingListPage() {
   let { listId } = useParams();
 
+  const [editing, setEditing] = useState(false);
+
   const [shoppingList, setShoppingList] = useState({});
   const { title, items } = shoppingList;
 
@@ -105,13 +107,19 @@ function ShoppingListPage() {
             >
               {item.name}
             </span>
-            <button id={item.id} onClick={handleDeleteItem}>
-              X
-            </button>
+            {editing ? (
+              <button id={item.id} onClick={handleDeleteItem}>
+                X
+              </button>
+            ) : null}
           </li>
         ))}
       </ul>
       <NewItemInput setNewItemInState={handleNewItem} listId={listId} />
+
+      <button onClick={() => setEditing(!editing)}>
+        {editing ? "Done" : "Edit"}
+      </button>
     </div>
   );
 }

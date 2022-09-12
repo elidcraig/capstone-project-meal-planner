@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAtom } from "jotai";
 import activePlanAtom from "../state/activePlanAtom";
 
-function MealCard({ planMeal }) {
+function MealCard({ planMeal, editing }) {
   const { meal, id } = planMeal;
   const { description, prep_time: prepTime, name } = meal;
 
@@ -25,7 +25,7 @@ function MealCard({ planMeal }) {
       <h5>{name}</h5>
       <h6>Prep Time: {prepTime} mins</h6>
       <p>{description}</p>
-      <button onClick={handleRemoveMeal}>Remove</button>
+      {editing ? <button onClick={handleRemoveMeal}>Remove</button> : null}
     </div>
   );
 }

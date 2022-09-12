@@ -35,6 +35,7 @@ function NewItemInput({ setNewItemInState, listId }) {
       <input
         type="text"
         value={input}
+        placeholder="Add a new item..."
         onChange={(e) => setInput(e.target.value)}
       />
       <input type="submit" className="button" />

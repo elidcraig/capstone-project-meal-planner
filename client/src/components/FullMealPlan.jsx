@@ -3,6 +3,7 @@ import MealCard from "./MealCard";
 import MealForm from "./MealForm";
 
 function FullMealPlan({ planMeals }) {
+  const [editing, setEditing] = useState(false);
   const [pastMeals, setPastMeals] = useState([]);
 
   useEffect(() => {
@@ -38,18 +39,24 @@ function FullMealPlan({ planMeals }) {
   }
 
   return (
-    <div className="full-meal-plan">
-      {daysOfWeek.map((day) => (
-        <div key={day} name={day} className="meal-plan-day">
-          <h4>{day}</h4>
-          {mealsReference[day] ? (
-            <MealCard key={day} planMeal={mealsReference[day]} />
-          ) : (
-            <MealForm key={day} day={day} pastMeals={pastMeals} />
-          )}
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="full-meal-plan">
+        {daysOfWeek.map((day) => (
+          <div key={day} name={day} className="meal-plan-day">
+            <h4>{day}</h4>
+            {mealsReference[day] ? (
+              <MealCard key={day} planMeal={mealsReference[day]} editing={editing} />
+            ) : (
+              <MealForm key={day} day={day} pastMeals={pastMeals} />
+            )}
+          </div>
+        ))}
+      </div>
+      <br />
+      <button onClick={() => setEditing(!editing)}>
+        {editing ? "Done" : "Edit"}
+      </button>
+    </>
   );
 }
 
