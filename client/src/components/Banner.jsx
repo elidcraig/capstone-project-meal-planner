@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
+import bannerLogo from "../SERVE.png";
 
 function Banner() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Banner() {
   return (
     <div className="banner">
       <Link to="/">
-        <div className="banner-logo">MEAL PLANNER</div>
+        <img className="banner-logo" alt="Serve logo" src={bannerLogo} />
       </Link>
       <div className="banner-button-group">
         {currentUser.id ? (

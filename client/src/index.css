@@ -1,3 +1,8 @@
+* {
+  --primary-brand: #ff5733;
+  --bg-white: #fff;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -9,21 +14,35 @@ body {
 
 a, .logout {
   text-decoration: none;
-  color: #1B998B;
+  color: var(--primary-brand);
 }
 
 button, .button {
   cursor: pointer;
-  background-color: #1B998B;
-  color: white;
+  background-color: var(--primary-brand);
+  color: var(--bg-white);
+  padding: 5px;
+  border-style: none;
   border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .banner {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-white);
+  border-width: 0px 0px 5px 0px;
+  border-style: solid;
+  border-color: var(--primary-brand);
 }
 
-.banner-button-group a {
+.banner-logo {
+  max-height: 70px;
+}
+
+.banner-button-group a, .logout {
   margin-right: 10px;
+  font-weight: bold;
 }
