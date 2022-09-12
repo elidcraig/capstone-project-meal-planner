@@ -99,7 +99,11 @@ function MealForm({ day, pastMeals = [] }) {
             <br />
             <label htmlFor="description">Description</label>
             <br />
-            <textarea name="description">{formInput.description}</textarea>
+            <input
+              value={formInput.description}
+              type="text"
+              name="description"
+            />
             <br />
             <label htmlFor="prep_time">Prep Time (mins)</label>
             <br />

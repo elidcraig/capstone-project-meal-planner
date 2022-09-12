@@ -16,14 +16,14 @@ function MealCard({ planMeal }) {
       const newPlanState = { ...activePlan, plan_meals: newPlanMeals };
       setActivePlan(newPlanState);
     } else {
-      const data = await response.json()
-      console.log(data.errors)
+      const data = await response.json();
+      console.log(data.errors);
     }
   }
   return (
     <div className="meal-card">
-      <h6>{name}</h6>
-      <p>{prepTime}</p>
+      <h5>{name}</h5>
+      <h6>Prep Time: {prepTime} mins</h6>
       <p>{description}</p>
       <button onClick={handleRemoveMeal}>Remove</button>
     </div>

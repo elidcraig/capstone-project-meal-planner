@@ -3,7 +3,6 @@ import MealCard from "./MealCard";
 import MealForm from "./MealForm";
 
 function FullMealPlan({ planMeals }) {
-
   const [pastMeals, setPastMeals] = useState([]);
 
   useEffect(() => {
@@ -44,9 +43,9 @@ function FullMealPlan({ planMeals }) {
         <div key={day} name={day} className="meal-plan-day">
           <h4>{day}</h4>
           {mealsReference[day] ? (
-            <MealCard planMeal={mealsReference[day]} />
+            <MealCard key={day} planMeal={mealsReference[day]} />
           ) : (
-            <MealForm day={day} pastMeals={pastMeals} />
+            <MealForm key={day} day={day} pastMeals={pastMeals} />
           )}
         </div>
       ))}

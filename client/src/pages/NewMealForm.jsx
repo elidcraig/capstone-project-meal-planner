@@ -48,9 +48,12 @@ function NewMealForm() {
       <br />
       <label htmlFor="description">Description</label>
       <br />
-      <textarea name="description" onChange={handleFormChange}>
-        {formInput.description}
-      </textarea>
+      <input
+        value={formInput.description}
+        type="text"
+        name="description"
+        onChange={handleFormChange}
+      />
       <br />
       <label htmlFor="prep_time">Prep Time (mins)</label>
       <br />

@@ -21,11 +21,16 @@ button, .button {
   cursor: pointer;
   background-color: var(--primary-brand);
   color: var(--bg-white);
-  padding: 5px;
+  padding: 4px;
+  margin-left: 5px;
   border-style: none;
   border-radius: 5px;
   font-size: 16px;
   font-weight: bold;
+}
+
+input {
+  margin-top: 2px;
 }
 
 .banner {
@@ -65,7 +70,7 @@ button, .button {
   text-align: center;
 }
 
-.mini-list {
+.mini-list, .mini-plan {
   width: 500px;
   margin-top: 30px;
   border-style: solid;
@@ -78,11 +83,25 @@ button, .button {
   padding-left: 80px;
 }
 
-.mini-plan {
-  width: 500px;
+.full-meal-plan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.meal-plan-day {
+  width: 150px;
+  padding: 10px;
   margin-top: 30px;
   border-style: solid;
   border-width: 2px;
   border-color: var(--primary-brand);
   border-radius: 5px;
+  text-align: center;
+}
+
+.meal-card {
+  border-top-style: dashed;
+  border-top-width: 2px;
+  border-top-color: var(--primary-brand)
 }
