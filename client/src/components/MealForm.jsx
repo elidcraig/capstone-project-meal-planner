@@ -109,6 +109,10 @@ function MealForm({ day, pastMeals = [] }) {
             <br />
             <input value={formInput.prep_time} type="number" name="prep_time" />
             <br />
+            <label htmlFor="image_url">Image Url</label>
+            <br />
+            <input value={formInput.image_url} type="text" name="image_url" />
+            <br />
             <input type="submit" className="button" value="Confirm" />
             <button
               onClick={() => {

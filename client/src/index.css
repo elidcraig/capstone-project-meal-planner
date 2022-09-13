@@ -105,3 +105,9 @@ input {
   border-top-width: 2px;
   border-top-color: var(--primary-brand)
 }
+
+.meal-card img {
+  max-width: 150px;
+  max-height: 150px;
+  margin-top: 10px;
+}

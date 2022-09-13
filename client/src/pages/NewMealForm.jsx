@@ -64,6 +64,15 @@ function NewMealForm() {
         onChange={handleFormChange}
       />
       <br />
+      <label htmlFor="image_url">Image URL</label>
+      <br />
+      <input
+        type="text"
+        name="image_url"
+        value={formInput.image_url}
+        onChange={handleFormChange}
+      />
+      <br />
       <input type="submit" className="button" value="Confirm" />
     </form>
   );

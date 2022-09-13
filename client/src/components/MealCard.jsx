@@ -4,7 +4,7 @@ import activePlanAtom from "../state/activePlanAtom";
 
 function MealCard({ planMeal, editing }) {
   const { meal, id } = planMeal;
-  const { description, prep_time: prepTime, name } = meal;
+  const { description, prep_time: prepTime, image_url: imageUrl, name } = meal;
 
   const [activePlan, setActivePlan] = useAtom(activePlanAtom);
   const { plan_meals: planMeals } = activePlan;
@@ -22,6 +22,7 @@ function MealCard({ planMeal, editing }) {
   }
   return (
     <div className="meal-card">
+      <img src={imageUrl} />
       <h5>{name}</h5>
       <h6>Prep Time: {prepTime} mins</h6>
       <p>{description}</p>
