@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :list_follows, only: [:index, :create, :destroy]
+  resources :plan_follows, only: [:index, :create, :destroy]
   resources :plan_meals, only: [:create, :update, :destroy]
   resources :meals
   get '/past_meals', to: 'meals#index'

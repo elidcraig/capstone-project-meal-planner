@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_182219) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_010336) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_182219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "list_follows", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "list_id", null: false
+    t.string "permission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_list_follows_on_list_id"
+    t.index ["user_id"], name: "index_list_follows_on_user_id"
   end
 
   create_table "list_items", force: :cascade do |t|
@@ -47,6 +57,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_182219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_meals_on_user_id"
+  end
+
+  create_table "plan_follows", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "plan_id", null: false
+    t.string "permission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_plan_follows_on_plan_id"
+    t.index ["user_id"], name: "index_plan_follows_on_user_id"
   end
 
   create_table "plan_meals", force: :cascade do |t|
@@ -77,10 +97,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_182219) do
   end
 
   add_foreign_key "items", "users"
+  add_foreign_key "list_follows", "lists"
+  add_foreign_key "list_follows", "users"
   add_foreign_key "list_items", "items"
   add_foreign_key "list_items", "lists"
   add_foreign_key "lists", "users"
   add_foreign_key "meals", "users"
+  add_foreign_key "plan_follows", "plans"
+  add_foreign_key "plan_follows", "users"
   add_foreign_key "plan_meals", "meals"
   add_foreign_key "plan_meals", "plans"
   add_foreign_key "plans", "users"
