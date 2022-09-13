@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import activePlanAtom from "../state/activePlanAtom";
 import FullMealPlan from "../components/FullMealPlan";
+import currentUserAtom from "../state/currentUserAtom";
+import SharingForm from "../components/SharingForm";
 
 function MealPlanPage() {
   let { planId } = useParams();
-
+  const [currentUser] = useAtom(currentUserAtom);
   const [mealPlan, setMealPlan] = useAtom(activePlanAtom);
-  const { name, plan_meals: planMeals } = mealPlan;
+  const { name, plan_meals: planMeals, user: planUser } = mealPlan;
 
   const [targetTextContent, setTargetTextContent] = useState();
 
@@ -43,6 +45,8 @@ function MealPlanPage() {
     }
   }
 
+  if (!planUser) return <h2>Loading...</h2>;
+
   return (
     <div className="meal-plan-page">
       <h2
@@ -54,6 +58,9 @@ function MealPlanPage() {
         {name}
       </h2>
       <FullMealPlan planMeals={planMeals} />
+      <br />
+      <br />
+      {currentUser.id === planUser.id ? <SharingForm /> : null}
     </div>
   );
 }

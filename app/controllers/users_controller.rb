@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :current_user, only: :show
 
+  def index
+    render json: User.all, status: 200
+  end
+
   def show
     if session[:user_id]
       render json: @current_user

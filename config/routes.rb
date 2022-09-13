@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :items, only: [:create, :update, :destroy]
   # resources :list_items, only: :destroy
-
+  resources :users, only: :index
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'

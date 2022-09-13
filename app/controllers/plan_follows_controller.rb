@@ -2,7 +2,7 @@ class PlanFollowsController < ApplicationController
   before_action :current_user, only: :index
 
   def index
-    render json: current_user.followed_plans
+    render json: current_user.plan_follows
   end
 
   def create

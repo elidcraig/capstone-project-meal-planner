@@ -7,11 +7,13 @@ function AccountPage() {
   const [currentUser] = useAtom(currentUserAtom);
   const [editing, setEditing] = useState(false);
   const [userPlans, setUserPlans] = useState([]);
+  const [followedPlans, setFollowedPlans] = useState([]);
   const [userLists, setUserLists] = useState([]);
   const [userMeals, setUserMeals] = useState([]);
 
   useEffect(() => {
     getAndSetPlans();
+    getAndSetFollowedPlans();
     getAndSetLists();
     getAndSetMeals();
   }, []);
@@ -22,6 +24,17 @@ function AccountPage() {
 
     if (response.ok) {
       setUserPlans(data);
+    } else {
+      console.log(data.errors);
+    }
+  }
+
+  async function getAndSetFollowedPlans() {
+    const response = await fetch("/plan_follows");
+    const data = await response.json();
+    console.log(data);
+    if (response.ok) {
+      setFollowedPlans(data);
     } else {
       console.log(data.errors);
     }
@@ -60,6 +73,21 @@ function AccountPage() {
     }
   }
 
+  async function handleUnfollowPlan(e) {
+    const followId = parseInt(e.target.id);
+    const response = await fetch(`/plan_follows/${followId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      const newFollowState = followedPlans.filter(
+        (follow) => follow.id !== followId
+      );
+      setFollowedPlans(newFollowState);
+    } else {
+      console.error("OOPS");
+    }
+  }
+
   async function handleDeleteList(e) {
     const listId = parseInt(e.target.id);
     const response = await fetch(`/lists/${listId}`, { method: "DELETE" });
@@ -94,6 +122,20 @@ function AccountPage() {
             <Link to={`/plans/${plan.id}`}>{plan.name}</Link>
             {editing ? (
               <button id={plan.id} onClick={handleDeletePlan}>
+                X
+              </button>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
+      <h4>Followed Plans</h4>
+      <ul>
+        {followedPlans.map((follow) => (
+          <li key={follow.id}>
+            <Link to={`/plans/${follow.plan.id}`}>{follow.plan.name}</Link>
+            {editing ? (
+              <button id={follow.id} onClick={handleUnfollowPlan}>
                 X
               </button>
             ) : null}
