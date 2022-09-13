@@ -37,7 +37,7 @@ class MealsController < ApplicationController
   private
 
   def meal_params
-    params.permit(:user_id, :name, :description, :prep_time)
+    params.permit(:user_id, :name, :description, :image_url, :prep_time)
   end
 
 end
