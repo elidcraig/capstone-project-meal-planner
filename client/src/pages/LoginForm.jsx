@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const formDefault = {
   username: "",
@@ -33,7 +34,7 @@ function LoginForm() {
       setCurrentUser(data);
       navigate("/");
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 

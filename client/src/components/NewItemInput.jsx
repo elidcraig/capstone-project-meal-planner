@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
+import toast from "react-hot-toast";
 
 function NewItemInput({ setNewItemInState, listId }) {
   const [currentUser] = useAtom(currentUserAtom);
@@ -26,7 +27,7 @@ function NewItemInput({ setNewItemInState, listId }) {
       setNewItemInState(data);
       setInput("");
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 

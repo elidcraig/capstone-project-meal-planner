@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function MealUpdateForm() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function MealUpdateForm() {
       console.log(data);
       setFormInput(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -39,7 +40,7 @@ function MealUpdateForm() {
     if (response.ok) {
       setFormInput({});
       navigate("/account");
-    } else console.log(data.errors);
+    } else data.errors.forEach((error) => toast(error));
   }
 
   return (

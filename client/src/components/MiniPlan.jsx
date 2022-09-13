@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function MiniPlan() {
   const [featuredPlan, setFeaturedPlan] = useState({});
@@ -15,7 +16,7 @@ function MiniPlan() {
     if (response.ok) {
       if (data) setFeaturedPlan(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 

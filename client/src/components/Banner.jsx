@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
 import bannerLogo from "../SERVE.png";
+import toast from "react-hot-toast";
 
 function Banner() {
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ function Banner() {
     if (response.ok) {
       setCurrentUser({});
       navigate("/");
+    } else {
+      const data = await response.json();
+      data.errors.forEach((error) => toast(error));
     }
   }
 

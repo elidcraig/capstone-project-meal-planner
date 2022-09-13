@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
+import toast from "react-hot-toast";
 
 function SharingForm() {
   let { planId } = useParams();
@@ -21,7 +22,7 @@ function SharingForm() {
     if (response.ok) {
       setAllUsers(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -35,7 +36,7 @@ function SharingForm() {
     const data = await response.json();
     if (response.ok) {
       setSharing(false);
-    } else console.log(data.errors);
+    } else data.errors.forEach((error) => toast(error));
   }
 
   function handleSelectChange(e) {

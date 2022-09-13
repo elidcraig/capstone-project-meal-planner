@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function MiniList() {
   const [featuredList, setFeaturedList] = useState({});
@@ -15,7 +16,7 @@ function MiniList() {
     if (response.ok) {
       if (data) setFeaturedList(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 

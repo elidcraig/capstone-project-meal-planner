@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NewItemInput from "../components/NewItemInput";
+import toast from "react-hot-toast";
 
 function ShoppingListPage() {
   let { listId } = useParams();
@@ -25,7 +26,7 @@ function ShoppingListPage() {
     if (response.ok) {
       setShoppingList(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -40,7 +41,7 @@ function ShoppingListPage() {
     if (response.ok) {
       setShoppingList({ ...shoppingList, title: data.title });
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -59,7 +60,7 @@ function ShoppingListPage() {
       });
       setShoppingList({ ...shoppingList, items: newItems });
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -74,7 +75,8 @@ function ShoppingListPage() {
       const newItemsArray = items.filter((item) => item.id !== itemId);
       setShoppingList({ ...shoppingList, items: newItemsArray });
     } else {
-      console.error("OOPS");
+      const data = await response.json();
+      data.errors.forEach((error) => toast(error));
     }
   }
 

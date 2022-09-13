@@ -14,6 +14,7 @@ import MealPlanPage from "./pages/MealPlanPage";
 import NewMealPlanForm from "./pages/NewMealPlanForm";
 import NewMealForm from "./pages/NewMealForm";
 import MealUpdateForm from "./pages/MealUpdateForm";
+import toast, { Toaster, ToastBar } from "react-hot-toast";
 
 function App() {
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
@@ -30,6 +31,8 @@ function App() {
       setCurrentUser(data);
     }
   }
+
+  const notify = () => toast("Here is your toast.");
 
   return (
     <div className="app">
@@ -50,6 +53,20 @@ function App() {
         <Route path="/meals/:mealId/edit" element={<MealUpdateForm />} />
         <Route path="/meals/new" element={<NewMealForm />} />
       </Routes>
+      <button onClick={notify}>Make me a toast</button>
+      <Toaster position='bottom-center'>
+        {(t) => (
+          <ToastBar toast={t}>
+            {({ icon, message }) => (
+              <>
+                {icon}
+                {message}
+                {<button className="close-toast-button" onClick={() => toast.dismiss(t.id)}>X</button>}
+              </>
+            )}
+          </ToastBar>
+        )}
+      </Toaster>
     </div>
   );
 }

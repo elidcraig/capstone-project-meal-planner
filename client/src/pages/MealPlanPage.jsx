@@ -5,6 +5,7 @@ import activePlanAtom from "../state/activePlanAtom";
 import FullMealPlan from "../components/FullMealPlan";
 import currentUserAtom from "../state/currentUserAtom";
 import SharingForm from "../components/SharingForm";
+import toast from "react-hot-toast";
 
 function MealPlanPage() {
   let { planId } = useParams();
@@ -26,7 +27,7 @@ function MealPlanPage() {
     if (response.ok) {
       setMealPlan(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -41,7 +42,7 @@ function MealPlanPage() {
     if (response.ok) {
       setMealPlan({ ...mealPlan, name: data.name });
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 

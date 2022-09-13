@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
 import activePlanAtom from "../state/activePlanAtom";
+import toast from "react-hot-toast";
 
 function MealForm({ day, pastMeals = [] }) {
   let { planId } = useParams();
@@ -59,12 +60,11 @@ function MealForm({ day, pastMeals = [] }) {
       const newPlanState = { ...activePlan, plan_meals: newPlanMeals };
       setActivePlan(newPlanState);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
   async function handleAddPastMeal() {
-    console.log(formInput);
     const config = { meal_id: formInput.id, plan_id: planId, day: day };
 
     const response = await fetch("/plan_meals", {
@@ -79,7 +79,7 @@ function MealForm({ day, pastMeals = [] }) {
       const newPlanState = { ...activePlan, plan_meals: newPlanMeals };
       setActivePlan(newPlanState);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 

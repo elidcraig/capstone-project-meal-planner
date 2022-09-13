@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
+import toast from "react-hot-toast";
 
 function AccountPage() {
   const [currentUser] = useAtom(currentUserAtom);
@@ -25,7 +26,7 @@ function AccountPage() {
     if (response.ok) {
       setUserPlans(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -36,7 +37,7 @@ function AccountPage() {
     if (response.ok) {
       setFollowedPlans(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -47,7 +48,7 @@ function AccountPage() {
     if (response.ok) {
       setUserLists(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -58,7 +59,7 @@ function AccountPage() {
     if (response.ok) {
       setUserMeals(data);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -69,7 +70,8 @@ function AccountPage() {
       const newPlanState = userPlans.filter((plan) => plan.id !== planId);
       setUserPlans(newPlanState);
     } else {
-      console.error("Error processing DELETE request");
+      const data = await response.json();
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -84,7 +86,8 @@ function AccountPage() {
       );
       setFollowedPlans(newFollowState);
     } else {
-      console.error("OOPS");
+      const data = await response.json();
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -95,7 +98,8 @@ function AccountPage() {
       const newListState = userLists.filter((list) => list.id !== listId);
       setUserLists(newListState);
     } else {
-      console.error("Error processing DELETE request");
+      const data = await response.json();
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -106,7 +110,8 @@ function AccountPage() {
       const newMealState = userMeals.filter((meal) => meal.id !== mealId);
       setUserMeals(newMealState);
     } else {
-      console.error("Error processing DELETE request");
+      const data = await response.json();
+      data.errors.forEach((error) => toast(error));
     }
   }
 

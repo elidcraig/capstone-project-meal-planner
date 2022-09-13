@@ -29,6 +29,10 @@ button, .button {
   font-weight: bold;
 }
 
+.close-toast-button {
+  font-size: 10px;
+}
+
 input {
   margin-top: 2px;
 }

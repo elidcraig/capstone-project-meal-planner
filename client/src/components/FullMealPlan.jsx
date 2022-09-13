@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MealCard from "./MealCard";
 import MealForm from "./MealForm";
+import toast from "react-hot-toast";
 
 function FullMealPlan({ planMeals }) {
   const [editing, setEditing] = useState(false);
@@ -16,7 +17,7 @@ function FullMealPlan({ planMeals }) {
     if (response.ok) {
       setPastMeals([{ name: "New Meal" }, ...data]);
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
@@ -45,7 +46,11 @@ function FullMealPlan({ planMeals }) {
           <div key={day} name={day} className="meal-plan-day">
             <h4>{day}</h4>
             {mealsReference[day] ? (
-              <MealCard key={day} planMeal={mealsReference[day]} editing={editing} />
+              <MealCard
+                key={day}
+                planMeal={mealsReference[day]}
+                editing={editing}
+              />
             ) : (
               <MealForm key={day} day={day} pastMeals={pastMeals} />
             )}

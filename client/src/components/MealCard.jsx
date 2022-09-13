@@ -1,6 +1,7 @@
 import React from "react";
 import { useAtom } from "jotai";
 import activePlanAtom from "../state/activePlanAtom";
+import toast from "react-hot-toast";
 
 function MealCard({ planMeal, editing }) {
   const { meal, id } = planMeal;
@@ -17,7 +18,7 @@ function MealCard({ planMeal, editing }) {
       setActivePlan(newPlanState);
     } else {
       const data = await response.json();
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
   return (

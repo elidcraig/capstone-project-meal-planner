@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import currentUserAtom from "../state/currentUserAtom";
+import toast from "react-hot-toast";
 
 function NewMealForm() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function NewMealForm() {
       setFormInput({});
       navigate("/account");
     } else {
-      console.log(data.errors);
+      data.errors.forEach((error) => toast(error));
     }
   }
 
