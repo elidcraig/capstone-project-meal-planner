@@ -27,7 +27,7 @@ function App() {
   async function getAndSetCurrentUser() {
     const response = await fetch("/me");
     const data = await response.json();
-    if (response.ok) {
+    if (response.ok && data !== null) {
       setCurrentUser(data);
     }
   }
