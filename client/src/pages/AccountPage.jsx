@@ -120,6 +120,20 @@ function AccountPage() {
       <h2>{currentUser.username}</h2>
       <h4>{currentUser.email}</h4>
 
+      <h4>Your Lists</h4>
+      <ul>
+        {userLists.map((list) => (
+          <li key={list.id}>
+            <Link to={`/lists/${list.id}`}>{list.title}</Link>
+            {editing ? (
+              <button id={list.id} onClick={handleDeleteList}>
+                X
+              </button>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
       <h4>Your Plans</h4>
       <ul>
         {userPlans.map((plan) => (
@@ -141,20 +155,6 @@ function AccountPage() {
             <Link to={`/plans/${follow.plan.id}`}>{follow.plan.name}</Link>
             {editing ? (
               <button id={follow.id} onClick={handleUnfollowPlan}>
-                X
-              </button>
-            ) : null}
-          </li>
-        ))}
-      </ul>
-
-      <h4>Your Lists</h4>
-      <ul>
-        {userLists.map((list) => (
-          <li key={list.id}>
-            <Link to={`/lists/${list.id}`}>{list.title}</Link>
-            {editing ? (
-              <button id={list.id} onClick={handleDeleteList}>
                 X
               </button>
             ) : null}

@@ -36,6 +36,7 @@ function NewMealPlanForm() {
   return (
     <form className="new-meal-plan-form" onSubmit={handleCreateNewPlan}>
       <input
+        className="form-input"
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}

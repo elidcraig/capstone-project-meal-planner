@@ -29,6 +29,10 @@ button, .button {
   font-weight: bold;
 }
 
+.form-input {
+  margin-left: 5px;
+}
+
 .close-toast-button {
   font-size: 10px;
 }
@@ -81,6 +85,7 @@ input {
   border-width: 2px;
   border-color: var(--primary-brand);
   border-radius: 5px;  
+  box-shadow: 3px 3px 8px #799496;
 }
 .mini-list p {
   text-align: start;
@@ -99,8 +104,9 @@ input {
   margin-top: 30px;
   border-style: solid;
   border-width: 2px;
-  border-color: var(--primary-brand);
+  border-color: var(--primary-brand) ;
   border-radius: 5px;
+  box-shadow: 3px 3px 8px #799496;
   text-align: center;
 }
 

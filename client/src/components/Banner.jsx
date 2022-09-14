@@ -16,7 +16,7 @@ function Banner() {
     });
     if (response.ok) {
       setCurrentUser({});
-      navigate("/");
+      navigate("/login");
     } else {
       const data = await response.json();
       data.errors.forEach((error) => toast(error));

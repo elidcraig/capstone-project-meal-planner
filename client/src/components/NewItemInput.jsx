@@ -34,6 +34,7 @@ function NewItemInput({ setNewItemInState, listId }) {
   return (
     <form className="new-item-form" onSubmit={handleAddNewItem}>
       <input
+        className="form-input"
         type="text"
         value={input}
         placeholder="Add a new item..."

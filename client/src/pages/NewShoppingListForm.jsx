@@ -11,7 +11,7 @@ function NewShoppingListForm() {
   const [input, setInput] = useState("");
 
   async function handleCreateNewList(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     const config = {
       title: input,
@@ -36,6 +36,7 @@ function NewShoppingListForm() {
   return (
     <form className="new-shopping-list-form" onSubmit={handleCreateNewList}>
       <input
+        className="form-input"
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}

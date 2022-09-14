@@ -107,7 +107,7 @@ function MealForm({ day, pastMeals = [] }) {
             <br />
             <label htmlFor="prep_time">Prep Time (mins)</label>
             <br />
-            <input value={formInput.prep_time} type="number" name="prep_time" />
+            <input value={formInput.prep_time} type="number" min="0" name="prep_time" />
             <br />
             <label htmlFor="image_url">Image Url</label>
             <br />

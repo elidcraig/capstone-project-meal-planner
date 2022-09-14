@@ -58,6 +58,7 @@ function SharingForm() {
       {sharing ? (
         <>
           <input
+            className="form-input"
             type="text"
             placeholder="Search by username..."
             value={searchInput}

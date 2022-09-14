@@ -40,9 +40,12 @@ function LoginForm() {
 
   return (
     <form className="login-form" onSubmit={handleFormSubmit}>
-      <label htmlFor="username">Username</label>
+      <label className="form-input" htmlFor="username">
+        Username
+      </label>
       <br />
       <input
+        className="form-input"
         type="text"
         name="username"
         required
@@ -50,9 +53,12 @@ function LoginForm() {
         onChange={handleFormChange}
       />
       <br />
-      <label htmlFor="password">Password</label>
+      <label className="form-input" htmlFor="password">
+        Password
+      </label>
       <br />
       <input
+        className="form-input"
         type="password"
         name="password"
         required

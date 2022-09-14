@@ -32,8 +32,6 @@ function App() {
     }
   }
 
-  const notify = () => toast("Here is your toast.");
-
   return (
     <div className="app">
       <Banner />
@@ -53,7 +51,6 @@ function App() {
         <Route path="/meals/:mealId/edit" element={<MealUpdateForm />} />
         <Route path="/meals/new" element={<NewMealForm />} />
       </Routes>
-      <button onClick={notify}>Make me a toast</button>
       <Toaster position='bottom-center'>
         {(t) => (
           <ToastBar toast={t}>

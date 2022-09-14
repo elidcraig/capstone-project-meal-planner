@@ -45,9 +45,12 @@ function MealUpdateForm() {
 
   return (
     <form className="new-meal-form" onSubmit={handleUpdateMeal}>
-      <label htmlFor="name">Meal Name</label>
+      <label className="form-input" htmlFor="name">
+        Meal Name
+      </label>
       <br />
       <input
+        className="form-input"
         type="text"
         name="name"
         required
@@ -55,24 +58,37 @@ function MealUpdateForm() {
         onChange={handleFormChange}
       />
       <br />
-      <label htmlFor="description">Description</label>
-      <br />
-      <textarea name="description" onChange={handleFormChange}>
-        {formInput.description}
-      </textarea>
-      <br />
-      <label htmlFor="prep_time">Prep Time (mins)</label>
+      <label className="form-input" htmlFor="description">
+        Description
+      </label>
       <br />
       <input
+        className="form-input"
+        name="description"
+        onChange={handleFormChange}
+        value={formInput.description}
+        type="text"
+      />
+      <br />
+      <label className="form-input" htmlFor="prep_time">
+        Prep Time (mins)
+      </label>
+      <br />
+      <input
+        className="form-input"
         type="number"
         name="prep_time"
         value={formInput.prep_time}
         onChange={handleFormChange}
+        min="0"
       />
       <br />
-      <label htmlFor="image_url">Image URL</label>
+      <label className="form-input" htmlFor="image_url">
+        Image URL
+      </label>
       <br />
       <input
+        className="form-input"
         type="text"
         name="image_url"
         value={formInput.image_url}

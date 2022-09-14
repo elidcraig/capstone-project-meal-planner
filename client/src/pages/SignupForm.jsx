@@ -49,9 +49,12 @@ function SignupForm() {
 
   return (
     <form className="signup-form" onSubmit={handleFormSubmit}>
-      <label htmlFor="username">Username</label>
+      <label className="form-input" htmlFor="username">
+        Username
+      </label>
       <br />
       <input
+        className="form-input"
         type="text"
         name="username"
         required
@@ -59,9 +62,12 @@ function SignupForm() {
         onChange={handleFormChange}
       />
       <br />
-      <label htmlFor="email">Email</label>
+      <label className="form-input" htmlFor="email">
+        Email
+      </label>
       <br />
       <input
+        className="form-input"
         type="text"
         name="email"
         required
@@ -69,9 +75,12 @@ function SignupForm() {
         onChange={handleFormChange}
       />
       <br />
-      <label htmlFor="password">Password</label>
+      <label className="form-input" htmlFor="password">
+        Password
+      </label>
       <br />
       <input
+        className="form-input"
         type="password"
         name="password"
         required
@@ -79,9 +88,12 @@ function SignupForm() {
         onChange={handleFormChange}
       />
       <br />
-      <label htmlFor="passwordConfirm">Confirm Password</label>
+      <label className="form-input" htmlFor="passwordConfirm">
+        Confirm Password
+      </label>
       <br />
       <input
+        className="form-input"
         type="password"
         name="passwordConfirm"
         required
