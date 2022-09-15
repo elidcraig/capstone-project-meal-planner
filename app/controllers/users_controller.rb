@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 
   def create
     new_user = User.create! user_params
+    new_user.plans.create!(name: "#{new_user.username}'s plan")
+    new_user.lists.create!(title: "#{new_user.username}'s list")
     session[:user_id] = new_user.id
     render json: new_user, status: 201
   end
